@@ -1,0 +1,159 @@
+# PHP Exam Hall Allocation Management System - Git Ignore
+
+# Environment and Configuration Files
+.env
+.env.local
+.env.production
+.env.staging
+.env.development
+config/local.php
+config/production.php
+config/staging.php
+config/development.php
+
+# Database Files
+*.sql
+database/*.sql
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+logs/
+*.log
+log/
+logs/*.log
+logs/*.txt
+logs/*.csv
+
+# Cache and Temporary Files
+cache/
+tmp/
+temp/
+*.tmp
+*.swp
+*.swo
+*~
+
+# PHP Development Tools
+vendor/
+composer.lock
+composer.phar
+phpunit.phar
+phpmd.phar
+phpcs.phar
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.sublime-*
+*.atom
+*.iml
+*.ipr
+*.iws
+nbproject/
+*.project
+*.settings/
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Web Server Files
+.htaccess
+.htpasswd
+web.config
+*.htaccess
+*.htpasswd
+
+# Backup Files
+*.bak
+*.backup
+*.old
+*.orig
+*.save
+*.tmp
+
+# Test Files (if not needed in repo)
+tests/fixtures/
+tests/mocks/
+tests/data/
+*.test.php
+test_*.php
+
+# Documentation Build Files
+docs/build/
+docs/_build/
+docs/api/
+docs/html/
+
+# Download and Export Files
+downloads/
+exports/
+reports/
+*.csv
+*.pdf
+*.xlsx
+*.docx
+
+# Session and Upload Files
+sessions/
+uploads/
+user_uploads/
+public/uploads/
+public/downloads/
+
+# Security Files
+*.key
+*.crt
+*.pem
+*.p12
+*.pfx
+security/
+keys/
+
+# Performance and Monitoring
+*.prof
+*.trace
+*.cache
+*.pid
+
+# Third-party Dependencies
+node_modules/
+bower_components/
+jspm_packages/
+
+# Build and Deployment
+dist/
+build/
+deploy/
+*.min.js
+*.min.css
+*.bundle.js
+
+# Local Development
+local/
+dev/
+development/
+staging/
+
+# Error and Debug Files
+error_log
+debug.log
+xdebug.log
+php_error.log
+
+# PHP Extensions and Modules
+*.so
+*.dll
+*.dylib
+
+# Composer Cache
+composer.phar
+vendor-bin/

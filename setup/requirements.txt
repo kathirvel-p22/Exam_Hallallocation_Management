@@ -1,0 +1,51 @@
+# Exam Seat Allocation Management System - System Requirements
+
+## PHP Requirements
+- PHP 7.4 or higher (recommended: PHP 8.0+)
+- Required PHP Extensions:
+  - mysqli (MySQL database connectivity)
+  - gd (for image processing)
+  - mbstring (multibyte string support)
+  - openssl (for security features)
+  - session (for session management)
+  - json (for JSON handling)
+  - fileinfo (for file type detection)
+
+## Database Requirements
+- MySQL 5.7 or higher (recommended: MySQL 8.0+)
+- OR MariaDB 10.3 or higher
+- Database user with CREATE, INSERT, UPDATE, DELETE, SELECT privileges
+
+## Web Server Requirements
+- Apache 2.4+ with mod_rewrite enabled
+- OR Nginx 1.18+ with PHP-FPM
+- OR Built-in PHP development server (for development only)
+
+## Development Environment Support
+- XAMPP 7.4+ (Windows, macOS, Linux)
+- WAMP 3.2+ (Windows)
+- MAMP 4.0+ (macOS, Windows)
+- LAMP stack (Linux)
+
+## Optional Requirements
+- Composer (for dependency management)
+- Git (for version control)
+- Browser with JavaScript support (for frontend functionality)
+
+## Recommended System Specifications
+- RAM: 2GB minimum, 4GB recommended
+- Disk Space: 100MB for application, additional space for database
+- Operating System: Windows 10+, macOS 10.14+, Linux (Ubuntu 18.04+)
+
+## Security Requirements
+- HTTPS support (recommended for production)
+- File upload restrictions
+- Session security measures
+- CSRF protection enabled
+
+## Browser Compatibility
+- Chrome 80+
+- Firefox 75+
+- Safari 13+
+- Edge 80+
+- Opera 67+
