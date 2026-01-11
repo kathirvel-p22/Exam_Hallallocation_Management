@@ -1,0 +1,77 @@
+{
+  "version": 2,
+  "name": "exam-hall-allocation",
+  "builds": [
+    {
+      "src": "public/index.php",
+      "use": "@vercel/php"
+    },
+    {
+      "src": "auth/login.php",
+      "use": "@vercel/php"
+    },
+    {
+      "src": "auth/register.php",
+      "use": "@vercel/php"
+    },
+    {
+      "src": "auth/logout.php",
+      "use": "@vercel/php"
+    },
+    {
+      "src": "admin/dashboard.php",
+      "use": "@vercel/php"
+    },
+    {
+      "src": "student/dashboard.php",
+      "use": "@vercel/php"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "index.php"
+    },
+    {
+      "src": "/auth/(.*)",
+      "dest": "auth/$1"
+    },
+    {
+      "src": "/admin/(.*)",
+      "dest": "admin/$1"
+    },
+    {
+      "src": "/student/(.*)",
+      "dest": "student/$1"
+    },
+    {
+      "src": "/public/(.*)",
+      "dest": "public/$1"
+    },
+    {
+      "src": "/css/(.*)",
+      "dest": "css/$1"
+    },
+    {
+      "src": "/js/(.*)",
+      "dest": "js/$1"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "assets/$1"
+    }
+  ],
+  "functions": {
+    "public/index.php": {
+      "maxDuration": 30
+    },
+    "auth/login.php": {
+      "maxDuration": 30
+    }
+  },
+  "env": {
+    "APP_ENV": "production",
+    "APP_DEBUG": "false"
+  },
+  "regions": ["iad1"]
+}
