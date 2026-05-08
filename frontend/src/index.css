@@ -1,0 +1,135 @@
+/* src/index.css — AcadeX Global Styles */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Open+Sans:wght@300;400;600;700;800&family=Lato:wght@300;400;700;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --navy: #0B1437; --navy2: #152050; --navy3: #1E2D6B;
+    --gold: #D4AF37; --gold-light: #E8CB5C; --gold-dark: #A8880A;
+    --cream: #F9F6EE; --cream2: #F2EDD8;
+    --em: #0D6B4E; --ru: #A81C3A; --am: #C17F24;
+  }
+  * { @apply box-border; }
+  html { @apply scroll-smooth text-lg; }
+  body { 
+    @apply bg-[#F9F6EE] text-navy antialiased text-lg leading-relaxed;
+    font-family: 'Calibri', 'Roboto', 'Open Sans', 'Lato', system-ui, sans-serif !important;
+  }
+  ::-webkit-scrollbar { @apply w-1.5; }
+  ::-webkit-scrollbar-track { @apply bg-[#F2EDD8]; }
+  ::-webkit-scrollbar-thumb { @apply bg-gold rounded-full; }
+  h1,h2,h3 { 
+    @apply font-display; 
+    font-family: 'Calibri', 'Montserrat', Georgia, serif !important;
+  }
+  h1 { @apply text-4xl font-bold; }
+  h2 { @apply text-3xl font-semibold; }
+  h3 { @apply text-2xl font-medium; }
+  p { @apply text-lg leading-relaxed; }
+}
+
+@layer components {
+  /* ── Buttons ── */
+  .btn { 
+    @apply inline-flex items-center gap-3 px-6 py-4 rounded-xl font-semibold text-lg transition-all duration-200 cursor-pointer border-0 outline-none focus:ring-2 focus:ring-gold/40; 
+    font-family: 'Calibri', 'Roboto', 'Open Sans', system-ui, sans-serif !important;
+  }
+  .btn-gold { @apply btn bg-gold text-navy hover:bg-gold-400 shadow-gold hover:-translate-y-0.5 active:translate-y-0; }
+  .btn-navy { @apply btn bg-navy text-white hover:bg-navy-500 hover:-translate-y-0.5; }
+  .btn-ghost { @apply btn bg-white text-navy border border-[rgba(11,20,55,.14)] hover:border-gold/50 hover:bg-[rgba(212,175,55,.06)]; }
+  .btn-danger { @apply btn bg-ruby-exam-light text-ruby-exam border border-ruby-exam-border hover:bg-ruby-exam hover:text-white; }
+  .btn-success { @apply btn bg-emerald-exam-light text-emerald-exam border border-emerald-exam-border hover:bg-emerald-exam hover:text-white; }
+  .btn-sm { @apply px-4 py-2 text-base rounded-lg; }
+  .btn-xs { @apply px-3 py-1.5 text-base rounded-md; }
+  .btn-lg { @apply px-8 py-5 text-xl rounded-xl; }
+  .btn-icon { @apply w-12 h-12 p-0 justify-center rounded-xl; }
+
+  /* ── Cards ── */
+  .card { @apply bg-white border border-[rgba(11,20,55,.08)] rounded-2xl shadow-card; }
+  .card-hover { @apply card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover hover:border-gold/30; }
+  .card-sm { @apply p-4; }
+  .card-md { @apply p-6; }
+  .card-lg { @apply p-8; }
+
+  /* ── Form Fields ── */
+  .field-label { @apply block text-xs font-bold text-navy-300 uppercase tracking-wider font-mono mb-2; }
+  .field-input { @apply w-full bg-[#F9F6EE] border-[1.5px] border-[rgba(11,20,55,.14)] rounded-xl px-4 py-3 font-sans text-base text-navy transition-all duration-200 outline-none focus:border-gold focus:bg-white focus:ring-2 focus:ring-gold/10 placeholder:text-navy-300; }
+  .field-select { @apply field-input cursor-pointer; }
+  .field-textarea { @apply field-input min-h-[100px] resize-y; }
+  .field-error { @apply text-sm text-ruby-exam mt-1.5 flex items-center gap-1; }
+
+  /* ── Badges ── */
+  .badge { @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold font-mono; }
+  .badge-gold { @apply badge bg-[rgba(212,175,55,.1)] text-[#A8880A] border border-[rgba(212,175,55,.28)]; }
+  .badge-navy { @apply badge bg-[rgba(11,20,55,.06)] text-navy-300 border border-[rgba(11,20,55,.12)]; }
+  .badge-green { @apply badge bg-[rgba(13,107,78,.08)] text-emerald-exam border border-emerald-exam-border; }
+  .badge-red { @apply badge bg-[rgba(168,28,58,.08)] text-ruby-exam border border-ruby-exam-border; }
+  .badge-amber { @apply badge bg-[rgba(193,127,36,.08)] text-[#C17F24] border border-[rgba(193,127,36,.2)]; }
+  .badge-sky { @apply badge bg-[rgba(56,189,248,.08)] text-sky-700 border border-sky-200; }
+  .badge-live { @apply badge-green animate-pulse-dot; }
+
+  /* ── Status dots ── */
+  .dot-green { @apply w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_0_2px_rgba(52,211,153,.3)] animate-pulse-dot; }
+  .dot-red { @apply w-2 h-2 rounded-full bg-red-400 animate-pulse-dot; }
+  .dot-amber { @apply w-2 h-2 rounded-full bg-amber-400; }
+  .dot-gray { @apply w-2 h-2 rounded-full bg-gray-300; }
+
+  /* ── Tables ── */
+  .tbl { @apply w-full border-collapse text-base; }
+  .tbl thead th { @apply px-4 py-3 text-left text-xs font-bold text-navy-300 uppercase tracking-wider font-mono bg-[#F9F6EE] border-b-2 border-[rgba(11,20,55,.08)]; }
+  .tbl tbody tr { @apply border-b border-[rgba(11,20,55,.06)] transition-colors hover:bg-[rgba(212,175,55,.04)]; }
+  .tbl tbody td { @apply px-4 py-4 align-middle text-base; }
+  .tbl tbody tr:last-child { @apply border-b-0; }
+
+  /* ── Progress bars ── */
+  .progress-track { @apply h-1.5 bg-[#F2EDD8] rounded-full overflow-hidden; }
+  .progress-bar { @apply h-full rounded-full transition-all duration-500; }
+
+  /* ── Sidebar ── */
+  .sb-link { @apply flex items-center gap-3 px-4 py-3 rounded-lg cursor-pointer transition-all duration-200 text-base text-white/50 hover:bg-white/[0.06] hover:text-white/85 relative; }
+  .sb-link.active { @apply bg-gold/10 text-white; }
+  .sb-link.active::before { @apply content-[''] absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-[55%] bg-gold rounded-r; }
+  .sb-icon { @apply w-5 text-center text-base shrink-0; }
+
+  /* ── Seat map ── */
+  .seat { @apply aspect-square rounded-md flex items-center justify-center text-[7px] font-mono font-semibold cursor-pointer transition-all duration-150 border-[1.5px]; }
+  .seat-present { @apply bg-emerald-exam-light text-emerald-exam border-emerald-exam-border; }
+  .seat-absent { @apply bg-ruby-exam-light text-ruby-exam border-ruby-exam-border; }
+  .seat-empty { @apply bg-[#F9F6EE] text-navy-300 border-[rgba(11,20,55,.08)]; }
+  .seat-mine { @apply bg-gold/20 text-[#A8880A] border-gold shadow-[0_0_0_2px_rgba(212,175,55,.5)]; }
+  .seat:hover { @apply scale-125 z-10; }
+
+  /* ── Alerts ── */
+  .alert { @apply flex items-start gap-3 p-4 rounded-xl text-base; }
+  .alert-success { @apply alert bg-emerald-exam-light border border-emerald-exam-border text-emerald-exam; }
+  .alert-warning { @apply alert bg-amber-50 border border-amber-200 text-amber-700; }
+  .alert-error { @apply alert bg-ruby-exam-light border border-ruby-exam-border text-ruby-exam; }
+  .alert-info { @apply alert bg-sky-50 border border-sky-200 text-sky-700; }
+
+  /* ── Chat bubbles ── */
+  .chat-bot { @apply max-w-[82%] px-4 py-3 rounded-2xl rounded-tl-sm bg-white border border-[rgba(11,20,55,.08)] text-navy text-base leading-relaxed; }
+  .chat-user { @apply max-w-[82%] px-4 py-3 rounded-2xl rounded-tr-sm bg-navy text-white text-base leading-relaxed ml-auto; }
+
+  /* ── Hall ticket ── */
+  .ticket { @apply bg-white rounded-2xl border border-[rgba(11,20,55,.1)] overflow-hidden shadow-card-hover; }
+  .ticket-header { @apply bg-gradient-to-br from-navy to-navy-300 p-5 flex items-center gap-3.5; }
+  .ticket-logo { @apply w-11 h-11 bg-gradient-to-br from-gold to-[#A8880A] rounded-xl flex items-center justify-center font-display text-xl font-bold text-navy shrink-0 shadow-gold; }
+
+  /* ── KPI cards ── */
+  .kpi { @apply card card-md relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover; }
+  .kpi-stripe { @apply absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl; }
+  .kpi-icon { @apply w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-4 shrink-0; }
+  .kpi-value { @apply font-display text-5xl font-bold text-navy leading-none; }
+  .kpi-label { @apply text-sm text-navy-300 mt-2; }
+  .kpi-delta { @apply text-sm mt-2 flex items-center gap-1 font-mono; }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .grid-auto-fill { grid-template-columns: repeat(auto-fill, minmax(var(--min-col, 200px), 1fr)); }
+  .scrollbar-none { scrollbar-width: none; }
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+}

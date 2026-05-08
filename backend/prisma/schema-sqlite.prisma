@@ -1,0 +1,327 @@
+// AcadeX — SQLite Compatible Prisma Schema
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ─── MODELS ──────────────────────────────────────────────────
+
+model Institution {
+  id          String   @id @default(cuid())
+  name        String
+  code        String   @unique
+  address     String?
+  city        String?
+  state       String?
+  website     String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  departments Department[]
+  users       User[]
+  exams       Exam[]
+  halls       Hall[]
+}
+
+model Department {
+  id            String   @id @default(cuid())
+  name          String
+  code          String
+  headName      String?
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  institutionId String
+
+  institution    Institution      @relation(fields: [institutionId], references: [id])
+  students       Student[]
+  invigilators   Invigilator[]
+  examDepartments ExamDepartment[]
+
+  @@unique([code, institutionId])
+}
+
+model User {
+  id             String    @id @default(cuid())
+  email          String    @unique
+  passwordHash   String
+  role           String    // SUPER_ADMIN, EXAM_ADMIN, INVIGILATOR, STUDENT
+  fcmToken       String?
+  institutionId  String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  institution    Institution?   @relation(fields: [institutionId], references: [id])
+  refreshTokens  RefreshToken[]
+  student        Student?
+  invigilator    Invigilator?
+  notifications  Notification[]
+  sentMessages   Message[]      @relation("SentMessages")
+  receivedMessages Message[]    @relation("ReceivedMessages")
+  auditLogs      AuditLog[]
+}
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  isRevoked Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Student {
+  id           String   @id @default(cuid())
+  userId       String   @unique
+  registerNo   String   @unique
+  name         String
+  phone        String?
+  semester     Int
+  academicYear String
+  hasDisability Boolean @default(false)
+  departmentId String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  department   Department     @relation(fields: [departmentId], references: [id])
+  allocations  Allocation[]
+  hallTickets  HallTicket[]
+  attendance   Attendance[]
+}
+
+model Invigilator {
+  id           String   @id @default(cuid())
+  userId       String   @unique
+  staffId      String   @unique
+  name         String
+  phone        String
+  departmentId String
+  isAvailable  Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user       User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  department Department   @relation(fields: [departmentId], references: [id])
+  duties     InvigDuty[]
+  issues     ExamIssue[]
+}
+
+model Hall {
+  id            String   @id @default(cuid())
+  name          String
+  code          String
+  building      String?
+  floor         Int?
+  capacity      Int
+  rows          Int
+  columns       Int
+  facilities    String   // JSON string for SQLite compatibility
+  isActive      Boolean  @default(true)
+  institutionId String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  institution Institution  @relation(fields: [institutionId], references: [id])
+  seats       Seat[]
+  allocations Allocation[]
+  duties      InvigDuty[]
+
+  @@unique([code, institutionId])
+}
+
+model Seat {
+  id         String  @id @default(cuid())
+  hallId     String
+  seatNumber String
+  row        Int
+  column     Int
+  isReserved Boolean @default(false)
+
+  hall        Hall         @relation(fields: [hallId], references: [id], onDelete: Cascade)
+  allocations Allocation[]
+
+  @@unique([hallId, seatNumber])
+}
+
+model Exam {
+  id               String   @id @default(cuid())
+  subjectName      String
+  subjectCode      String
+  date             DateTime
+  shift            String   // MORNING, AFTERNOON, EVENING
+  startTime        String
+  endTime          String
+  durationMins     Int
+  semester         Int
+  academicYear     String
+  level            String   // UG, PG, PHD
+  status           String   @default("DRAFT") // DRAFT, PUBLISHED, ONGOING, COMPLETED, CANCELLED
+  institutionId    String
+  createdByEmail   String
+  notes            String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  institution    Institution      @relation(fields: [institutionId], references: [id])
+  departments    ExamDepartment[]
+  allocations    Allocation[]
+  hallTickets    HallTicket[]
+  attendance     Attendance[]
+  duties         InvigDuty[]
+  issues         ExamIssue[]
+}
+
+model ExamDepartment {
+  id           String @id @default(cuid())
+  examId       String
+  departmentId String
+  studentCount Int    @default(0)
+
+  exam       Exam       @relation(fields: [examId], references: [id], onDelete: Cascade)
+  department Department @relation(fields: [departmentId], references: [id])
+
+  @@unique([examId, departmentId])
+}
+
+model Allocation {
+  id          String   @id @default(cuid())
+  examId      String
+  studentId   String
+  hallId      String
+  seatId      String
+  status      String   @default("COMPLETED") // PENDING, IN_PROGRESS, COMPLETED, FAILED
+  allocatedAt DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  exam        Exam         @relation(fields: [examId], references: [id])
+  student     Student      @relation(fields: [studentId], references: [id])
+  hall        Hall         @relation(fields: [hallId], references: [id])
+  seat        Seat         @relation(fields: [seatId], references: [id])
+  hallTickets HallTicket[]
+  attendance  Attendance[]
+
+  @@unique([examId, studentId])
+  @@unique([examId, seatId])
+}
+
+model HallTicket {
+  id           String    @id @default(cuid())
+  studentId    String
+  examId       String
+  allocationId String
+  qrToken      String    @unique
+  qrCodeUrl    String?
+  issuedAt     DateTime  @default(now())
+  expiresAt    DateTime
+  isRevoked    Boolean   @default(false)
+
+  student    Student    @relation(fields: [studentId], references: [id])
+  exam       Exam       @relation(fields: [examId], references: [id])
+  allocation Allocation @relation(fields: [allocationId], references: [id])
+
+  @@unique([studentId, examId])
+}
+
+model Attendance {
+  id           String    @id @default(cuid())
+  allocationId String
+  studentId    String
+  examId       String
+  status       String    @default("ABSENT") // PRESENT, ABSENT, LATE, EXCUSED
+  markedAt     DateTime?
+  method       String?
+  notes        String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  allocation Allocation @relation(fields: [allocationId], references: [id])
+  student    Student    @relation(fields: [studentId], references: [id])
+  exam       Exam       @relation(fields: [examId], references: [id])
+
+  @@unique([allocationId])
+}
+
+model InvigDuty {
+  id            String    @id @default(cuid())
+  invigilatorId String
+  examId        String
+  hallId        String
+  checkInAt     DateTime?
+  checkOutAt    DateTime?
+  isConfirmed   Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+
+  invigilator Invigilator @relation(fields: [invigilatorId], references: [id])
+  exam        Exam        @relation(fields: [examId], references: [id])
+  hall        Hall        @relation(fields: [hallId], references: [id])
+
+  @@unique([invigilatorId, examId])
+}
+
+model ExamIssue {
+  id             String    @id @default(cuid())
+  examId         String
+  invigilatorId  String
+  type           String    // MALPRACTICE, MEDICAL_EMERGENCY, etc.
+  severity       String    // LOW, MEDIUM, HIGH, CRITICAL
+  status         String    @default("OPEN") // OPEN, IN_PROGRESS, RESOLVED, DISMISSED
+  description    String
+  studentRegNo   String?
+  resolvedAt     DateTime?
+  resolutionNote String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  exam        Exam        @relation(fields: [examId], references: [id])
+  invigilator Invigilator @relation(fields: [invigilatorId], references: [id])
+}
+
+model Notification {
+  id          String    @id @default(cuid())
+  userId      String
+  type        String    // ALLOCATION_PUBLISHED, EXAM_REMINDER, etc.
+  channel     String    // IN_APP, EMAIL, PUSH, ALL
+  title       String
+  message     String
+  isRead      Boolean   @default(false)
+  sentAt      DateTime  @default(now())
+  readAt      DateTime?
+  metadata    String?   // JSON string for SQLite compatibility
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Message {
+  id         String   @id @default(cuid())
+  senderId   String
+  receiverId String
+  content    String
+  isRead     Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  sender   User @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver User @relation("ReceivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String
+  action     String
+  resource   String
+  resourceId String?
+  oldValue   String?  // JSON string for SQLite compatibility
+  newValue   String?  // JSON string for SQLite compatibility
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
