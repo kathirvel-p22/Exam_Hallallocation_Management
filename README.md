@@ -1,7 +1,7 @@
 # AcadeX — Intelligent Examination Hall Management Platform
 
 > **Advanced Full-Stack Web Application**  
-> React 18 + Node.js + PostgreSQL + Socket.io + Prisma + Redis + AI Chatbot
+> React 18 + Node.js + SQLite + Socket.io + Prisma + AI Chatbot
 
 ---
 
@@ -89,41 +89,51 @@ acadex/
 
 ---
 
-## 🚀 Quick Start (Docker — Recommended)
+## 🚀 Quick Start (Single Server — Recommended)
 
 ### Prerequisites
-- Docker Desktop
+- Node.js >= 20
 - Git
 
 ```bash
 # 1. Clone the project
-git clone https://github.com/your-org/acadex.git
-cd acadex
+git clone https://github.com/kathirvel-p22/Exam_Hallallocation_Management.git
+cd Exam_Hallallocation_Management
 
-# 2. Copy environment files
+# 2. Install all dependencies
+npm install
+
+# 3. Setup environment
 cp backend/.env.example backend/.env
+cp frontend/.env.example frontend/.env
 
-# 3. Start everything
-docker-compose up -d
+# 4. Database setup (SQLite - no external DB needed!)
+cd backend
+npx prisma generate
+npx prisma migrate dev --name init
+node prisma/seed.js
+cd ..
 
-# 4. Run database migrations + seed
-docker exec acadex_backend npx prisma migrate dev --name init
-docker exec acadex_backend node prisma/seed.js
+# 5. Build frontend
+cd frontend
+npm run build
+cd ..
 
-# 5. Open browser
-# Frontend: http://localhost:5173
-# Backend API: http://localhost:5000
-# Prisma Studio: http://localhost:5555 (optional, run separately)
+# 6. Start unified server (serves both frontend and backend)
+cd backend
+npm start
+
+# 7. Open browser
+# Platform: http://localhost:5000
+# API: http://localhost:5000/api
 ```
 
 ---
 
-## 🛠️ Manual Development Setup
+## 🛠️ Development Mode (Separate Servers)
 
 ### Prerequisites
 - Node.js >= 20
-- PostgreSQL 15+ or Supabase free account
-- Redis 7+ or Upstash free account
 
 ### Backend
 
@@ -135,9 +145,9 @@ npm install
 
 # Setup environment
 cp .env.example .env
-# Edit .env — fill DATABASE_URL, REDIS_URL, JWT secrets
+# Edit .env — JWT secrets (DATABASE_URL already set for SQLite)
 
-# Database setup
+# Database setup (SQLite - no external DB needed!)
 npx prisma generate
 npx prisma migrate dev --name init
 node prisma/seed.js
@@ -163,6 +173,8 @@ npm run dev
 # App running on http://localhost:5173
 ```
 
+**Note:** For production, use the unified single-server setup (see Quick Start above).
+
 ---
 
 ## 🔑 Demo Login Credentials
@@ -176,24 +188,28 @@ npm run dev
 
 ---
 
-## 🆓 Free Tech Stack
+## 🆓 Tech Stack
 
 ### Backend
-| Service       | Provider       | Free Tier         |
-|---------------|---------------|-------------------|
-| Database      | Supabase       | 500MB, 50K rows   |
-| Redis Cache   | Upstash        | 10K cmd/day       |
-| AI Chatbot    | Groq           | LLaMA 3, 14K rpm  |
-| Push Notifs   | Firebase FCM   | Unlimited         |
-| Email         | Gmail SMTP     | 500/day           |
-| File Storage  | Cloudinary     | 25GB free         |
-| Backend Host  | Render.com     | Free tier         |
+| Technology    | Purpose              | Notes                    |
+|---------------|---------------------|--------------------------|
+| SQLite        | Database            | File-based, zero config  |
+| Node.js       | Runtime             | v20+                     |
+| Express       | Web framework       | REST API                 |
+| Prisma        | ORM                 | Type-safe queries        |
+| Socket.io     | Real-time           | Live updates             |
+| JWT           | Authentication      | Secure tokens            |
+| Winston       | Logging             | Structured logs          |
 
 ### Frontend
-| Service       | Provider  | Free Tier      |
-|---------------|----------|----------------|
-| Hosting       | Vercel    | Unlimited       |
-| CDN           | Vercel    | Global CDN      |
+| Technology    | Purpose             | Notes                    |
+|---------------|---------------------|--------------------------|
+| React 18      | UI Framework        | Modern hooks             |
+| Vite          | Build tool          | Fast HMR                 |
+| Tailwind CSS  | Styling             | Utility-first            |
+| Zustand       | State management    | Lightweight              |
+| Axios         | HTTP client         | Auto token refresh       |
+| Socket.io     | Real-time client    | Live updates             |
 
 ---
 
