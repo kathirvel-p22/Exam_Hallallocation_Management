@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinkCortexa AI — Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;500;600&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:#020810;font-family:'Exo 2',sans-serif;overflow:hidden;position:relative;
+}
+
+canvas#bg{position:fixed;inset:0;z-index:0}
+
+.glow-orb{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0}
+.glow-orb-1{width:500px;height:500px;background:radial-gradient(circle,rgba(0,98,255,0.15),transparent);top:-200px;right:-100px}
+.glow-orb-2{width:400px;height:400px;background:radial-gradient(circle,rgba(124,58,237,0.12),transparent);bottom:-100px;left:-100px}
+
+.login-card{
+  position:relative;z-index:10;
+  background:rgba(10,22,40,0.92);
+  border:1px solid rgba(0,200,255,0.2);
+  border-radius:20px;
+  padding:40px;
+  width:420px;
+  backdrop-filter:blur(20px);
+  box-shadow:0 40px 80px rgba(0,0,0,0.5),0 0 0 1px rgba(0,200,255,0.05);
+}
+
+.login-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,#00C8FF,transparent);
+  border-radius:20px 20px 0 0;
+}
+
+.logo-wrap{text-align:center;margin-bottom:32px}
+.logo-icon-lg{
+  width:64px;height:64px;border-radius:16px;
+  background:linear-gradient(135deg,#00C8FF,#0062FF);
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:'Orbitron',monospace;font-size:22px;font-weight:900;color:#fff;
+  box-shadow:0 0 40px rgba(0,200,255,0.5);margin-bottom:14px;
+  animation:pulse-logo 2s ease-in-out infinite;
+}
+@keyframes pulse-logo{0%,100%{box-shadow:0 0 40px rgba(0,200,255,0.5)}50%{box-shadow:0 0 60px rgba(0,200,255,0.8)}}
+
+.logo-title{font-family:'Orbitron',monospace;font-size:20px;font-weight:900;color:#E0F0FF;letter-spacing:2px}
+.logo-sub{font-size:10px;letter-spacing:4px;color:#00C8FF;text-transform:uppercase;margin-top:4px}
+
+.tabs{display:flex;background:rgba(5,11,26,0.8);border-radius:10px;padding:4px;margin-bottom:28px;border:1px solid rgba(0,200,255,0.1)}
+.tab{flex:1;padding:10px;border-radius:8px;text-align:center;cursor:pointer;
+  font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:1px;
+  color:#3D5F7A;transition:all 0.2s}
+.tab.active{background:linear-gradient(135deg,#0062FF,#00C8FF);color:#fff;box-shadow:0 4px 16px rgba(0,200,255,0.3)}
+
+.form-group{margin-bottom:18px}
+.form-label{font-size:10px;font-weight:700;color:#3D5F7A;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;display:block}
+.form-input{
+  width:100%;background:rgba(5,11,26,0.8);
+  border:1px solid rgba(0,200,255,0.15);border-radius:10px;
+  padding:13px 16px;font-family:'Space Mono',monospace;font-size:13px;
+  color:#E0F0FF;outline:none;transition:all 0.3s;
+}
+.form-input:focus{border-color:#00C8FF;box-shadow:0 0 0 3px rgba(0,200,255,0.1)}
+.form-input::placeholder{color:#2E4A66}
+
+.btn-access{
+  width:100%;background:linear-gradient(135deg,#0062FF,#00C8FF);
+  border:none;border-radius:10px;padding:14px;
+  font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:#fff;
+  cursor:pointer;letter-spacing:2px;transition:all 0.3s;margin-top:4px;
+  position:relative;overflow:hidden;
+}
+.btn-access::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.1),transparent);
+  opacity:0;transition:opacity 0.2s;
+}
+.btn-access:hover::before{opacity:1}
+.btn-access:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,200,255,0.5)}
+.btn-access:active{transform:translateY(0)}
+
+.demo-box{
+  margin-top:16px;background:rgba(5,11,26,0.6);
+  border:1px solid rgba(0,200,255,0.08);border-radius:10px;padding:12px;text-align:center;
+}
+.demo-box .label{font-size:9px;letter-spacing:2px;color:#2E4A66;text-transform:uppercase;margin-bottom:6px}
+.demo-box .creds{font-family:'Space Mono',monospace;font-size:11px;color:#3D5F7A;line-height:1.7}
+
+.error-msg{color:#FF3A5C;font-size:11px;margin-top:6px;display:none}
+.success-msg{color:#00FF88;font-size:11px;margin-top:6px;display:none;text-align:center}
+
+.status-bar{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  background:rgba(10,22,40,0.9);border:1px solid rgba(0,255,136,0.2);border-radius:20px;
+  padding:8px 20px;display:flex;align-items:center;gap:8px;z-index:20;
+  backdrop-filter:blur(10px);
+}
+.status-dot-sm{width:6px;height:6px;border-radius:50%;background:#00FF88;box-shadow:0 0 6px #00FF88;animation:blink 1.5s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.status-text-sm{font-size:10px;font-weight:600;color:#00FF88;letter-spacing:1.5px;text-transform:uppercase}
+
+#clock-sm{font-family:'Space Mono',monospace;font-size:11px;color:rgba(0,200,255,0.6);margin-left:8px}
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+<div class="glow-orb glow-orb-1"></div>
+<div class="glow-orb glow-orb-2"></div>
+
+<div class="login-card">
+  <div class="logo-wrap">
+    <div class="logo-icon-lg">LC</div>
+    <div class="logo-title">LinkCortexa AI</div>
+    <div class="logo-sub">Cyber Threat Intelligence</div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" id="tab-login" onclick="switchTab('login')">LOGIN</div>
+    <div class="tab" id="tab-register" onclick="switchTab('register')">REGISTER</div>
+  </div>
+
+  <!-- Login Form -->
+  <div id="loginForm">
+    <div class="form-group">
+      <label class="form-label">Email</label>
+      <input class="form-input" id="loginEmail" type="email" placeholder="Enter your email" value="kathirvel.p2006@gmail.com">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <input class="form-input" id="loginPass" type="password" placeholder="••••••••" value="1234567890">
+    </div>
+    <div class="error-msg" id="loginError">Invalid credentials. Please try again.</div>
+    <button class="btn-access" onclick="handleLogin()">⊙ ACCESS SYSTEM</button>
+    <div class="demo-box">
+      <div class="label">Demo Credentials</div>
+      <div class="creds">kathirvel.p2006@gmail.com / 1234567890</div>
+    </div>
+  </div>
+
+  <!-- Register Form -->
+  <div id="registerForm" style="display:none">
+    <div class="form-group">
+      <label class="form-label">Full Name</label>
+      <input class="form-input" type="text" placeholder="Enter your name">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Email</label>
+      <input class="form-input" type="email" placeholder="Enter your email">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <input class="form-input" type="password" placeholder="Create password">
+    </div>
+    <div class="success-msg" id="regSuccess">✓ Account created! Please login.</div>
+    <button class="btn-access" onclick="handleRegister()">⊙ CREATE ACCOUNT</button>
+  </div>
+</div>
+
+<div class="status-bar">
+  <div class="status-dot-sm"></div>
+  <span class="status-text-sm">System Active</span>
+  <span id="clock-sm">00:00:00</span>
+</div>
+
+<script>
+// BG Canvas
+const canvas = document.getElementById('bg');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const nodes = Array.from({length:80},()=>({
+  x:Math.random()*canvas.width,y:Math.random()*canvas.height,
+  vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,
+  r:Math.random()*1.5+.5,
+  color:Math.random()>.7?'#FF3A5C':'#00C8FF'
+}));
+
+function drawBG(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  nodes.forEach((n,i)=>{
+    nodes.slice(i+1).forEach(m=>{
+      const d=Math.hypot(n.x-m.x,n.y-m.y);
+      if(d<100){
+        ctx.beginPath();ctx.moveTo(n.x,n.y);ctx.lineTo(m.x,m.y);
+        ctx.strokeStyle=`rgba(0,200,255,${.06*(1-d/100)})`;ctx.lineWidth=.4;ctx.stroke();
+      }
+    });
+    ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
+    ctx.fillStyle=n.color;ctx.shadowColor=n.color;ctx.shadowBlur=4;ctx.fill();ctx.shadowBlur=0;
+    n.x+=n.vx;n.y+=n.vy;
+    if(n.x<0||n.x>canvas.width)n.vx*=-1;
+    if(n.y<0||n.y>canvas.height)n.vy*=-1;
+  });
+  requestAnimationFrame(drawBG);
+}
+drawBG();
+
+function switchTab(t){
+  document.getElementById('loginForm').style.display=t==='login'?'block':'none';
+  document.getElementById('registerForm').style.display=t==='register'?'block':'none';
+  document.getElementById('tab-login').classList.toggle('active',t==='login');
+  document.getElementById('tab-register').classList.toggle('active',t==='register');
+}
+
+function handleLogin(){
+  const email=document.getElementById('loginEmail').value;
+  const pass=document.getElementById('loginPass').value;
+  const btn=document.querySelector('#loginForm .btn-access');
+  btn.textContent='⟳ VERIFYING...';
+  setTimeout(()=>{
+    if(email&&pass){
+      // Store login state in localStorage
+      localStorage.setItem('loggedIn', 'true');
+      window.location.href='index.html';
+    } else {
+      document.getElementById('loginError').style.display='block';
+      btn.textContent='⊙ ACCESS SYSTEM';
+    }
+  },1500);
+}
+
+function handleRegister(){
+  const btn=document.querySelector('#registerForm .btn-access');
+  btn.textContent='⟳ CREATING...';
+  setTimeout(()=>{
+    document.getElementById('regSuccess').style.display='block';
+    btn.textContent='⊙ CREATE ACCOUNT';
+    setTimeout(()=>switchTab('login'),1500);
+  },1200);
+}
+
+// Clock
+setInterval(()=>{
+  const n=new Date();
+  const p=x=>String(x).padStart(2,'0');
+  document.getElementById('clock-sm').textContent=`${p(n.getHours())}:${p(n.getMinutes())}:${p(n.getSeconds())}`;
+},1000);
+
+document.getElementById('loginEmail')?.addEventListener('keydown',e=>{if(e.key==='Enter')handleLogin();});
+document.getElementById('loginPass')?.addEventListener('keydown',e=>{if(e.key==='Enter')handleLogin();});
+</script>
+</body>
+</html>

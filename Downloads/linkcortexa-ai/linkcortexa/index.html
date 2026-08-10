@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinkCortexa AI — Cyber Threat Intelligence</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="app-layout">
+
+  <!-- ══════════════ SIDEBAR ══════════════ -->
+  <nav class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">LC</div>
+      <div class="logo-text">
+        <div class="logo-name">LinkCortexa</div>
+        <div class="logo-sub">AI Security</div>
+      </div>
+    </div>
+
+    <div class="sidebar-status">
+      <div class="status-dot"></div>
+      <div class="status-text">System Active</div>
+    </div>
+
+    <div class="sidebar-nav">
+      <div class="nav-section-label">Core</div>
+
+      <a class="nav-item active" data-page="dashboard">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7" rx="1" stroke-width="2"/>
+          <rect x="14" y="3" width="7" height="7" rx="1" stroke-width="2"/>
+          <rect x="3" y="14" width="7" height="7" rx="1" stroke-width="2"/>
+          <rect x="14" y="14" width="7" height="7" rx="1" stroke-width="2"/>
+        </svg>
+        Dashboard
+      </a>
+
+      <a class="nav-item" data-page="scanner">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8" stroke-width="2"/>
+          <path d="M21 21l-4.35-4.35" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        URL Scanner
+        <span class="nav-badge">AI</span>
+      </a>
+
+      <a class="nav-item" data-page="threats">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5z" stroke-width="2"/>
+          <path d="M2 17l10 5 10-5" stroke-width="2"/>
+          <path d="M2 12l10 5 10-5" stroke-width="2"/>
+        </svg>
+        Threat Database
+        <span class="nav-badge">19</span>
+      </a>
+
+      <div class="nav-section-label" style="margin-top:8px">Intelligence</div>
+
+      <a class="nav-item" data-page="analytics">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Analytics
+      </a>
+
+      <a class="nav-item" data-page="intelligence">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="3" stroke-width="2"/>
+          <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        Intelligence
+      </a>
+
+      <a class="nav-item" data-page="blockchain">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <rect x="2" y="7" width="6" height="6" rx="1" stroke-width="2"/>
+          <rect x="9" y="2" width="6" height="6" rx="1" stroke-width="2"/>
+          <rect x="16" y="7" width="6" height="6" rx="1" stroke-width="2"/>
+          <rect x="9" y="16" width="6" height="6" rx="1" stroke-width="2"/>
+          <path d="M8 10h1M15 5h1M8 10V5h4M15 10h1M15 10V5M12 8v2M12 16v-4" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        Blockchain Logs
+      </a>
+
+      <div class="nav-section-label" style="margin-top:8px">Account</div>
+
+      <a class="nav-item" data-page="profile">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="12" cy="7" r="4" stroke-width="2"/>
+        </svg>
+        Profile
+      </a>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="user-card">
+        <div class="user-avatar">KP</div>
+        <div class="user-info">
+          <div class="user-name">Kathirvel P</div>
+          <div class="user-role">Security Analyst</div>
+        </div>
+        <svg width="14" height="14" fill="none" stroke="rgba(106,158,192,0.5)" viewBox="0 0 24 24">
+          <path d="M9 18l6-6-6-6" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════════ MAIN CONTENT ══════════════ -->
+  <div class="main-content">
+
+    <!-- HEADER -->
+    <header class="top-header">
+      <div class="header-title">
+        <h1>Security Overview</h1>
+        <p>Real-Time Threat Intelligence Dashboard</p>
+      </div>
+      <div class="header-actions">
+        <div class="header-time" id="clock">00:00:00</div>
+
+        <!-- Notification btn -->
+        <div class="header-btn" id="notifBtn" style="position:relative">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke-width="2"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0" stroke-width="2"/>
+          </svg>
+          <div class="notif-badge">3</div>
+
+          <!-- Notification dropdown -->
+          <div class="notif-dropdown" id="notifDropdown">
+            <div class="notif-title">ALERTS · 3 NEW</div>
+            <div class="notif-item">
+              <div class="notif-icon">⚠️</div>
+              <div class="notif-text">
+                <strong>High Risk Threat Detected</strong>
+                <span>paypal-secure-login.xyz · Risk 92</span>
+              </div>
+            </div>
+            <div class="notif-item">
+              <div class="notif-icon">🦠</div>
+              <div class="notif-text">
+                <strong>Malware Domain Blocked</strong>
+                <span>crypto-airdrop.tk · Risk 88</span>
+              </div>
+            </div>
+            <div class="notif-item">
+              <div class="notif-icon">🔗</div>
+              <div class="notif-text">
+                <strong>Blockchain Log Verified</strong>
+                <span>Transaction #1847392 confirmed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings btn -->
+        <div class="header-btn">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3" stroke-width="2"/>
+            <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" stroke-width="2"/>
+          </svg>
+        </div>
+      </div>
+    </header>
+
+    <!-- ══ PAGE CONTENT ══ -->
+    <div class="page-content">
+
+      <!-- ═══════════════ DASHBOARD PAGE ═══════════════ -->
+      <div class="page active" id="page-dashboard">
+
+        <!-- Hero Network Map -->
+        <div class="dashboard-hero">
+          <canvas class="hero-canvas" id="heroCanvas"></canvas>
+          <div class="hero-overlay">
+            <div class="hero-tag">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="var(--cyan)"><circle cx="6" cy="6" r="6"/></svg>
+              Global Threat Monitoring Active
+            </div>
+            <div class="hero-title">GLOBAL CYBER<br><span>INTELLIGENCE</span> NETWORK</div>
+            <div class="hero-desc">Real-time AI-powered threat detection across 195 countries. Monitoring 2.4M+ URLs daily.</div>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+          <div class="stat-card" style="--stat-color:#00C8FF">
+            <div class="stat-label">Total Scans</div>
+            <div class="stat-value">50</div>
+            <div class="stat-sub">All time</div>
+            <div class="stat-icon">🔍</div>
+          </div>
+          <div class="stat-card" style="--stat-color:#FF3A5C">
+            <div class="stat-label">Threats Today</div>
+            <div class="stat-value" id="statThreatsToday">19</div>
+            <div class="stat-sub">Last 24 hours</div>
+            <div class="stat-icon">⚠️</div>
+          </div>
+          <div class="stat-card" style="--stat-color:#FF9500">
+            <div class="stat-label">Threats This Week</div>
+            <div class="stat-value">40</div>
+            <div class="stat-sub">Last 7 days</div>
+            <div class="stat-icon">📊</div>
+          </div>
+          <div class="stat-card" style="--stat-color:#7C3AED">
+            <div class="stat-label">Blockchain Logs</div>
+            <div class="stat-value">50</div>
+            <div class="stat-sub">Tamper-proof records</div>
+            <div class="stat-icon">🔗</div>
+          </div>
+          <div class="stat-card" style="--stat-color:#00FF88">
+            <div class="stat-label">Avg Risk Score</div>
+            <div class="stat-value">52</div>
+            <div class="stat-sub">Composite score</div>
+            <div class="stat-icon">🎯</div>
+          </div>
+        </div>
+
+        <!-- Charts row -->
+        <div class="grid-60-40" style="margin-bottom:16px">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">Threat Activity</div>
+                <div class="panel-sub">7-Day Detection Trend</div>
+              </div>
+              <div class="panel-badge badge-live">● LIVE</div>
+            </div>
+            <div class="chart-container" style="height:220px">
+              <canvas id="threatActivityChart"></canvas>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">Threat Breakdown</div>
+                <div class="panel-sub">Status Distribution</div>
+              </div>
+            </div>
+            <div class="chart-container" style="height:220px">
+              <canvas id="threatBreakdownChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- World Map + Live Feed -->
+        <div class="grid-60-40">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">Global Attack Map</div>
+                <div class="panel-sub">Real-Time Threat Origins</div>
+              </div>
+              <div class="panel-badge badge-live">● LIVE</div>
+            </div>
+            <div class="world-map-container">
+              <canvas id="worldMapCanvas"></canvas>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">Live Threat Feed</div>
+                <div class="panel-sub">Real-Time Detections</div>
+              </div>
+              <div class="panel-badge badge-live">● LIVE</div>
+            </div>
+            <div class="threat-feed" id="threatFeed"></div>
+          </div>
+        </div>
+
+        <!-- Blockchain status -->
+        <div class="panel" style="margin-top:16px">
+          <div class="panel-header">
+            <div style="display:flex;align-items:center;gap:12px">
+              <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#7C3AED,#4F46E5);display:flex;align-items:center;justify-content:center;font-size:20px">🔗</div>
+              <div>
+                <div class="panel-title">Blockchain Security Active</div>
+                <div class="panel-sub">Ethereum Sepolia Testnet · 50 Tamper-Proof Records</div>
+              </div>
+            </div>
+            <div class="panel-badge" style="color:#7C3AED;border-color:rgba(124,58,237,0.3);background:rgba(124,58,237,0.07)">NETWORK ACTIVE</div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+            <div style="background:rgba(124,58,237,0.07);border:1px solid rgba(124,58,237,0.2);border-radius:8px;padding:12px;text-align:center">
+              <div style="font-family:'Orbitron',monospace;font-size:20px;font-weight:700;color:#7C3AED">50</div>
+              <div style="font-size:10px;color:#6A9EC0;letter-spacing:1px;text-transform:uppercase;margin-top:4px">Total Blocks</div>
+            </div>
+            <div style="background:rgba(0,255,136,0.05);border:1px solid rgba(0,255,136,0.2);border-radius:8px;padding:12px;text-align:center">
+              <div style="font-family:'Orbitron',monospace;font-size:20px;font-weight:700;color:#00FF88">100%</div>
+              <div style="font-size:10px;color:#6A9EC0;letter-spacing:1px;text-transform:uppercase;margin-top:4px">Verified</div>
+            </div>
+            <div style="background:rgba(0,200,255,0.05);border:1px solid rgba(0,200,255,0.2);border-radius:8px;padding:12px;text-align:center">
+              <div style="font-family:'Orbitron',monospace;font-size:20px;font-weight:700;color:#00C8FF">SHA256</div>
+              <div style="font-size:10px;color:#6A9EC0;letter-spacing:1px;text-transform:uppercase;margin-top:4px">Hash Algorithm</div>
+            </div>
+            <div style="background:rgba(255,58,92,0.05);border:1px solid rgba(255,58,92,0.2);border-radius:8px;padding:12px;text-align:center">
+              <div style="font-family:'Orbitron',monospace;font-size:20px;font-weight:700;color:#FF3A5C">0</div>
+              <div style="font-size:10px;color:#6A9EC0;letter-spacing:1px;text-transform:uppercase;margin-top:4px">Tampered Logs</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /dashboard -->
+
+      <!-- ═══════════════ URL SCANNER PAGE ═══════════════ -->
+      <div class="page" id="page-scanner">
+
+        <div class="scanner-hero">
+          <div class="hero-tag" style="justify-content:center;margin-bottom:12px">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="var(--cyan)"><circle cx="6" cy="6" r="6"/></svg>
+            AI-Powered Multi-Layer Analysis
+          </div>
+          <div class="scanner-title">ADVANCED URL SCANNER</div>
+          <div class="scanner-desc">Real-time threat detection powered by AI · VirusTotal · PhishTank · AbuseIPDB</div>
+          <div class="scanner-input-wrap">
+            <input class="scanner-input" id="scanInput" type="text"
+              placeholder="Enter URL to scan (e.g. https://suspicious-site.xyz)">
+            <button class="btn-scan" id="scanBtn">⚡ SCAN NOW</button>
+          </div>
+        </div>
+
+        <!-- Loading -->
+        <div class="panel scan-loading" id="scanLoading">
+          <div class="scan-loading-ring"></div>
+          <div class="scan-loading-text">Analyzing Threat Intelligence...</div>
+        </div>
+
+        <!-- Result -->
+        <div class="scan-result" id="scanResult"></div>
+
+        <!-- Features grid -->
+        <div class="grid-3">
+          <div class="panel">
+            <div style="font-size:24px;margin-bottom:10px">🧠</div>
+            <div class="panel-title" style="margin-bottom:6px">AI Model Analysis</div>
+            <div style="font-size:12px;color:#6A9EC0;line-height:1.5">
+              Random Forest & Neural Network models analyze URL patterns, entropy, keywords, and domain similarity to detect phishing.
+            </div>
+          </div>
+          <div class="panel">
+            <div style="font-size:24px;margin-bottom:10px">🌐</div>
+            <div class="panel-title" style="margin-bottom:6px">Threat Intelligence APIs</div>
+            <div style="font-size:12px;color:#6A9EC0;line-height:1.5">
+              Cross-checks with VirusTotal, PhishTank, AbuseIPDB, and URLHaus for real-time blacklist verification.
+            </div>
+          </div>
+          <div class="panel">
+            <div style="font-size:24px;margin-bottom:10px">🔗</div>
+            <div class="panel-title" style="margin-bottom:6px">Blockchain Logging</div>
+            <div style="font-size:12px;color:#6A9EC0;line-height:1.5">
+              Every threat detected is SHA256 hashed and stored on Ethereum Sepolia for tamper-proof forensic evidence.
+            </div>
+          </div>
+        </div>
+
+        <!-- Analysis layers -->
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Multi-Layer Analysis Engine</div>
+              <div class="panel-sub">How LinkCortexa AI Detects Threats</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+            <div style="background:var(--bg-panel);border:1px solid var(--border);border-radius:10px;padding:14px">
+              <div style="font-size:11px;font-weight:700;color:var(--cyan);letter-spacing:1px;margin-bottom:10px;text-transform:uppercase">① URL Structure</div>
+              <div style="font-size:11px;color:#6A9EC0;line-height:1.7">
+                • URL length analysis<br>
+                • Special character count<br>
+                • IP-based URL detection<br>
+                • Subdomain depth<br>
+                • Hyphen patterns
+              </div>
+            </div>
+            <div style="background:var(--bg-panel);border:1px solid var(--border);border-radius:10px;padding:14px">
+              <div style="font-size:11px;font-weight:700;color:var(--cyan);letter-spacing:1px;margin-bottom:10px;text-transform:uppercase">② Domain Intelligence</div>
+              <div style="font-size:11px;color:#6A9EC0;line-height:1.7">
+                • Domain age verification<br>
+                • Typosquatting detection<br>
+                • Homograph attacks<br>
+                • Blacklist cross-check<br>
+                • SSL certificate validity
+              </div>
+            </div>
+            <div style="background:var(--bg-panel);border:1px solid var(--border);border-radius:10px;padding:14px">
+              <div style="font-size:11px;font-weight:700;color:var(--cyan);letter-spacing:1px;margin-bottom:10px;text-transform:uppercase">③ AI Risk Score</div>
+              <div style="font-size:11px;color:#6A9EC0;line-height:1.7">
+                • Phishing keyword density<br>
+                • Redirect chain analysis<br>
+                • Brand impersonation<br>
+                • Entropy scoring<br>
+                • Composite risk index
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /scanner -->
+
+      <!-- ═══════════════ THREATS PAGE ═══════════════ -->
+      <div class="page" id="page-threats">
+
+        <div class="filter-bar">
+          <input class="filter-input" id="tableSearch" placeholder="🔍 Search threats...">
+          <select class="filter-select">
+            <option>All Types</option>
+            <option>Phishing</option>
+            <option>Malware</option>
+            <option>Suspicious</option>
+            <option>Safe</option>
+          </select>
+          <select class="filter-select">
+            <option>All Countries</option>
+            <option>Russia</option>
+            <option>China</option>
+            <option>USA</option>
+            <option>Brazil</option>
+            <option>Nigeria</option>
+          </select>
+          <select class="filter-select">
+            <option>All Risk Levels</option>
+            <option>High (70+)</option>
+            <option>Medium (40-69)</option>
+            <option>Low (0-39)</option>
+          </select>
+          <button class="btn-export" onclick="exportCSV()">⬇ Export CSV</button>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Threat Intelligence Database</div>
+              <div class="panel-sub">All Scanned URLs · Sorted by Date</div>
+            </div>
+            <div class="panel-badge badge-live">50 RECORDS</div>
+          </div>
+          <div class="threat-table-wrap">
+            <table class="threat-table">
+              <thead>
+                <tr>
+                  <th>URL / Domain</th>
+                  <th>IP Address</th>
+                  <th>Country</th>
+                  <th>Threat Type</th>
+                  <th>Risk Score</th>
+                  <th>Scan Time</th>
+                  <th>Blockchain</th>
+                </tr>
+              </thead>
+              <tbody id="threatTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div><!-- /threats -->
+
+      <!-- ═══════════════ ANALYTICS PAGE ═══════════════ -->
+      <div class="page" id="page-analytics">
+
+        <div class="stats-grid" style="grid-template-columns:repeat(4,1fr)">
+          <div class="stat-card" style="--stat-color:#FF3A5C">
+            <div class="stat-label">Phishing Detected</div>
+            <div class="stat-value">16</div>
+            <div class="stat-sub">32% of total</div>
+          </div>
+          <div class="stat-card" style="--stat-color:#FF9500">
+            <div class="stat-label">Malware Detected</div>
+            <div class="stat-value">10</div>
+            <div class="stat-sub">20% of total</div>
+          </div>
+          <div class="stat-card" style="--stat-color:#FFD60A">
+            <div class="stat-label">Suspicious</div>
+            <div class="stat-value">14</div>
+            <div class="stat-sub">28% of total</div>
+          </div>
+          <div class="stat-card" style="--stat-color:#00FF88">
+            <div class="stat-label">Safe URLs</div>
+            <div class="stat-value">10</div>
+            <div class="stat-sub">20% of total</div>
+          </div>
+        </div>
+
+        <div class="analytics-grid">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">Weekly Threat Trend</div>
+                <div class="panel-sub">Month-over-Month Analysis</div>
+              </div>
+            </div>
+            <div class="chart-container" style="height:240px">
+              <canvas id="weeklyTrendChart"></canvas>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">Risk Score Radar</div>
+                <div class="panel-sub">System Risk Profile</div>
+              </div>
+            </div>
+            <div class="radar-container">
+              <canvas id="riskRadarChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-60-40">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">Top Attack Countries</div>
+                <div class="panel-sub">Origin of Detected Threats</div>
+              </div>
+            </div>
+            <div class="chart-container" style="height:260px">
+              <canvas id="countryThreatChart"></canvas>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">Country Breakdown</div>
+                <div class="panel-sub">Threat Count by Origin</div>
+              </div>
+            </div>
+            <div class="country-list" style="margin-top:4px">
+              <div class="country-item">
+                <span class="country-name">🇷🇺 Russia</span>
+                <div class="country-bar-wrap"><div class="country-bar" style="width:85%;background:linear-gradient(90deg,#FF3A5C,#FF6B6B)"></div></div>
+                <span class="country-count" style="color:#FF3A5C">42</span>
+              </div>
+              <div class="country-item">
+                <span class="country-name">🇨🇳 China</span>
+                <div class="country-bar-wrap"><div class="country-bar" style="width:76%;background:linear-gradient(90deg,#FF3A5C,#FF6B6B)"></div></div>
+                <span class="country-count" style="color:#FF3A5C">38</span>
+              </div>
+              <div class="country-item">
+                <span class="country-name">🇺🇸 USA</span>
+                <div class="country-bar-wrap"><div class="country-bar" style="width:56%"></div></div>
+                <span class="country-count">28</span>
+              </div>
+              <div class="country-item">
+                <span class="country-name">🇮🇳 India</span>
+                <div class="country-bar-wrap"><div class="country-bar" style="width:42%;background:linear-gradient(90deg,#FF9500,#FFB347)"></div></div>
+                <span class="country-count" style="color:#FF9500">21</span>
+              </div>
+              <div class="country-item">
+                <span class="country-name">🇧🇷 Brazil</span>
+                <div class="country-bar-wrap"><div class="country-bar" style="width:36%;background:linear-gradient(90deg,#FF3A5C,#FF6B6B)"></div></div>
+                <span class="country-count" style="color:#FF3A5C">18</span>
+              </div>
+              <div class="country-item">
+                <span class="country-name">🇩🇪 Germany</span>
+                <div class="country-bar-wrap"><div class="country-bar" style="width:28%"></div></div>
+                <span class="country-count">14</span>
+              </div>
+              <div class="country-item">
+                <span class="country-name">🇳🇬 Nigeria</span>
+                <div class="country-bar-wrap"><div class="country-bar" style="width:16%;background:linear-gradient(90deg,#FF3A5C,#FF6B6B)"></div></div>
+                <span class="country-count" style="color:#FF3A5C">8</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /analytics -->
+
+      <!-- ═══════════════ INTELLIGENCE PAGE ═══════════════ -->
+      <div class="page" id="page-intelligence">
+
+        <div class="grid-2" style="margin-bottom:16px">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">Active Threat Campaigns</div>
+                <div class="panel-sub">Live Intelligence Feed</div>
+              </div>
+              <div class="panel-badge badge-live">● LIVE</div>
+            </div>
+            <div class="intel-card">
+              <div class="intel-card-header">
+                <span class="intel-card-title">Operation Phantom Bank</span>
+                <span class="type-badge type-phishing">Phishing</span>
+              </div>
+              <div class="intel-card-body">Coordinated phishing campaign targeting banking customers across 12 countries. Uses cloned PayPal and Bank of America login pages hosted on .xyz domains.</div>
+              <div style="margin-top:8px;font-size:10px;color:#3D5F7A">Origin: Russia · Active since: 2026-03-01 · Domains: 23 detected</div>
+            </div>
+            <div class="intel-card">
+              <div class="intel-card-header">
+                <span class="intel-card-title">CryptoStealer-X</span>
+                <span class="type-badge type-malware">Malware</span>
+              </div>
+              <div class="intel-card-body">Malware distribution campaign via fake cryptocurrency airdrop websites. Downloads credential-stealing trojans disguised as wallet software.</div>
+              <div style="margin-top:8px;font-size:10px;color:#3D5F7A">Origin: China · Active since: 2026-02-14 · Domains: 47 detected</div>
+            </div>
+            <div class="intel-card">
+              <div class="intel-card-header">
+                <span class="intel-card-title">TechSupport Scam Wave</span>
+                <span class="type-badge type-suspicious">Suspicious</span>
+              </div>
+              <div class="intel-card-body">Fake Microsoft technical support websites deployed to harvest remote access. Uses social engineering with urgent security alert popups.</div>
+              <div style="margin-top:8px;font-size:10px;color:#3D5F7A">Origin: India · Active since: 2026-03-08 · Domains: 15 detected</div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">Threat Intelligence APIs</div>
+                <div class="panel-sub">Connected Data Sources</div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--bg-panel);border:1px solid var(--border);border-radius:10px">
+                <div style="width:36px;height:36px;border-radius:8px;background:rgba(0,200,255,0.1);display:flex;align-items:center;justify-content:center;font-size:16px">🛡️</div>
+                <div style="flex:1">
+                  <div style="font-size:13px;font-weight:600;color:var(--text-primary)">VirusTotal</div>
+                  <div style="font-size:11px;color:#6A9EC0">Multi-engine malware scanner · 70+ AV engines</div>
+                </div>
+                <div style="font-size:10px;font-weight:600;color:#00FF88;border:1px solid rgba(0,255,136,0.3);border-radius:4px;padding:2px 8px">ACTIVE</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--bg-panel);border:1px solid var(--border);border-radius:10px">
+                <div style="width:36px;height:36px;border-radius:8px;background:rgba(255,58,92,0.1);display:flex;align-items:center;justify-content:center;font-size:16px">🎣</div>
+                <div style="flex:1">
+                  <div style="font-size:13px;font-weight:600;color:var(--text-primary)">PhishTank</div>
+                  <div style="font-size:11px;color:#6A9EC0">Crowd-sourced phishing database · 2M+ entries</div>
+                </div>
+                <div style="font-size:10px;font-weight:600;color:#00FF88;border:1px solid rgba(0,255,136,0.3);border-radius:4px;padding:2px 8px">ACTIVE</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--bg-panel);border:1px solid var(--border);border-radius:10px">
+                <div style="width:36px;height:36px;border-radius:8px;background:rgba(255,149,0,0.1);display:flex;align-items:center;justify-content:center;font-size:16px">🔍</div>
+                <div style="flex:1">
+                  <div style="font-size:13px;font-weight:600;color:var(--text-primary)">AbuseIPDB</div>
+                  <div style="font-size:11px;color:#6A9EC0">IP reputation & abuse reporting · 500M+ IPs</div>
+                </div>
+                <div style="font-size:10px;font-weight:600;color:#00FF88;border:1px solid rgba(0,255,136,0.3);border-radius:4px;padding:2px 8px">ACTIVE</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--bg-panel);border:1px solid var(--border);border-radius:10px">
+                <div style="width:36px;height:36px;border-radius:8px;background:rgba(124,58,237,0.1);display:flex;align-items:center;justify-content:center;font-size:16px">🔗</div>
+                <div style="flex:1">
+                  <div style="font-size:13px;font-weight:600;color:var(--text-primary)">URLHaus</div>
+                  <div style="font-size:11px;color:#6A9EC0">Malware URL sharing platform · 1M+ URLs</div>
+                </div>
+                <div style="font-size:10px;font-weight:600;color:#00FF88;border:1px solid rgba(0,255,136,0.3);border-radius:4px;padding:2px 8px">ACTIVE</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">AI Model Performance</div>
+              <div class="panel-sub">Real-Time Detection Metrics</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+            <div style="background:var(--bg-panel);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">
+              <div style="font-family:'Orbitron',monospace;font-size:20px;font-weight:700;color:#00FF88">97.8%</div>
+              <div style="font-size:10px;color:#6A9EC0;letter-spacing:1px;text-transform:uppercase;margin-top:4px">Accuracy Rate</div>
+            </div>
+            <div style="background:var(--bg-panel);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">
+              <div style="font-family:'Orbitron',monospace;font-size:20px;font-weight:700;color:#00C8FF">1.2%</div>
+              <div style="font-size:10px;color:#6A9EC0;letter-spacing:1px;text-transform:uppercase;margin-top:4px">False Positive</div>
+            </div>
+            <div style="background:var(--bg-panel);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">
+              <div style="font-family:'Orbitron',monospace;font-size:20px;font-weight:700;color:#7C3AED">0.8s</div>
+              <div style="font-size:10px;color:#6A9EC0;letter-spacing:1px;text-transform:uppercase;margin-top:4px">Avg Response</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /intelligence -->
+
+      <!-- ═══════════════ BLOCKCHAIN PAGE ═══════════════ -->
+      <div class="page" id="page-blockchain">
+
+        <div class="stats-grid" style="grid-template-columns:repeat(4,1fr)">
+          <div class="stat-card" style="--stat-color:#7C3AED">
+            <div class="stat-label">Total Blocks</div>
+            <div class="stat-value">50</div>
+            <div class="stat-sub">Ethereum Sepolia</div>
+            <div class="stat-icon">🔗</div>
+          </div>
+          <div class="stat-card" style="--stat-color:#00FF88">
+            <div class="stat-label">Verified Logs</div>
+            <div class="stat-value">100%</div>
+            <div class="stat-sub">Tamper-proof</div>
+            <div class="stat-icon">✓</div>
+          </div>
+          <div class="stat-card" style="--stat-color:#00C8FF">
+            <div class="stat-label">Hash Algorithm</div>
+            <div class="stat-value">SHA256</div>
+            <div class="stat-sub">Cryptographic</div>
+            <div class="stat-icon">🔐</div>
+          </div>
+          <div class="stat-card" style="--stat-color:#FF3A5C">
+            <div class="stat-label">Tampered Logs</div>
+            <div class="stat-value">0</div>
+            <div class="stat-sub">Zero incidents</div>
+            <div class="stat-icon">🛡️</div>
+          </div>
+        </div>
+
+        <div class="grid-60-40">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">Blockchain Transaction Log</div>
+                <div class="panel-sub">Ethereum Sepolia Testnet · Real-Time Logging</div>
+              </div>
+              <div class="panel-badge badge-live">● LIVE</div>
+            </div>
+            <div class="blockchain-logs" id="blockchainLogs"></div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">Network Status</div>
+                <div class="panel-sub">Blockchain Health Monitor</div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:rgba(0,255,136,0.05);border:1px solid rgba(0,255,136,0.2);border-radius:8px">
+                <span style="font-size:12px;color:#6A9EC0">Network Status</span>
+                <span style="font-size:11px;font-weight:600;color:#00FF88">● CONNECTED</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-panel);border:1px solid var(--border);border-radius:8px">
+                <span style="font-size:12px;color:#6A9EC0">Gas Price</span>
+                <span style="font-family:'Orbitron',monospace;font-size:11px;color:#00C8FF">12.5 Gwei</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-panel);border:1px solid var(--border);border-radius:8px">
+                <span style="font-size:12px;color:#6A9EC0">Block Time</span>
+                <span style="font-family:'Orbitron',monospace;font-size:11px;color:#00C8FF">12.1s</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--bg-panel);border:1px solid var(--border);border-radius:8px">
+                <span style="font-size:12px;color:#6A9EC0">Contract Address</span>
+                <span style="font-family:'Space Mono',monospace;font-size:9px;color:#7C3AED">0x742d...8f3a</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Smart Contract Details</div>
+              <div class="panel-sub">LinkCortexA Security Logger v2.1</div>
+            </div>
+            <div class="panel-badge" style="color:#7C3AED;border-color:rgba(124,58,237,0.3);background:rgba(124,58,237,0.07)">DEPLOYED</div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px">
+            <div>
+              <div style="font-size:11px;font-weight:700;color:var(--cyan);letter-spacing:1px;margin-bottom:10px;text-transform:uppercase">Contract Functions</div>
+              <div style="font-size:11px;color:#6A9EC0;line-height:1.7">
+                • logThreatDetection(url, riskScore, threatType)<br>
+                • verifyLogIntegrity(blockHash)<br>
+                • getThreatHistory(domain)<br>
+                • updateRiskThreshold(newThreshold)<br>
+                • emergencyPause() - Admin only
+              </div>
+            </div>
+            <div>
+              <div style="font-size:11px;font-weight:700;color:var(--cyan);letter-spacing:1px;margin-bottom:10px;text-transform:uppercase">Security Features</div>
+              <div style="font-size:11px;color:#6A9EC0;line-height:1.7">
+                • Immutable threat records<br>
+                • Multi-signature validation<br>
+                • Automated hash verification<br>
+                • Tamper-proof timestamps<br>
+                • Decentralized storage (IPFS)
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /blockchain -->
+
+      <!-- ═══════════════ PROFILE PAGE ═══════════════ -->
+      <div class="page" id="page-profile">
+
+        <div class="profile-hero">
+          <div class="profile-avatar">KP</div>
+          <div class="profile-info">
+            <div class="profile-name">Kathirvel P</div>
+            <div class="profile-role">Senior Security Analyst</div>
+            <div class="profile-location">🌍 Chennai, India · Joined March 2024</div>
+          </div>
+          <button class="btn-edit-profile">✏️ Edit Profile</button>
+        </div>
+
+        <div class="grid-60-40">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">Security Activity</div>
+                <div class="panel-sub">Your Threat Detection History</div>
+              </div>
+            </div>
+            <div class="activity-timeline">
+              <div class="activity-item">
+                <div class="activity-dot" style="background:#FF3A5C"></div>
+                <div class="activity-content">
+                  <div class="activity-title">High-Risk Phishing Detected</div>
+                  <div class="activity-desc">Identified paypal-secure-login.xyz with 92% risk score</div>
+                  <div class="activity-time">2 hours ago</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot" style="background:#FF9500"></div>
+                <div class="activity-content">
+                  <div class="activity-title">Malware Domain Blocked</div>
+                  <div class="activity-desc">Prevented access to crypto-airdrop-claim.tk</div>
+                  <div class="activity-time">4 hours ago</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot" style="background:#7C3AED"></div>
+                <div class="activity-content">
+                  <div class="activity-title">Blockchain Log Verified</div>
+                  <div class="activity-desc">Transaction #1847392 confirmed on Ethereum</div>
+                  <div class="activity-time">6 hours ago</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot" style="background:#00C8FF"></div>
+                <div class="activity-content">
+                  <div class="activity-title">System Health Check</div>
+                  <div class="activity-desc">All threat detection systems operational</div>
+                  <div class="activity-time">8 hours ago</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">Account Settings</div>
+                <div class="panel-sub">Security & Preferences</div>
+              </div>
+            </div>
+            <div class="settings-list">
+              <div class="setting-item">
+                <div class="setting-info">
+                  <div class="setting-name">Two-Factor Authentication</div>
+                  <div class="setting-desc">Enhanced account security</div>
+                </div>
+                <div class="setting-toggle active">ON</div>
+              </div>
+              <div class="setting-item">
+                <div class="setting-info">
+                  <div class="setting-name">Real-time Alerts</div>
+                  <div class="setting-desc">Instant threat notifications</div>
+                </div>
+                <div class="setting-toggle active">ON</div>
+              </div>
+              <div class="setting-item">
+                <div class="setting-info">
+                  <div class="setting-name">Email Reports</div>
+                  <div class="setting-desc">Weekly security summaries</div>
+                </div>
+                <div class="setting-toggle">OFF</div>
+              </div>
+              <div class="setting-item">
+                <div class="setting-info">
+                  <div class="setting-name">API Access</div>
+                  <div class="setting-desc">Third-party integrations</div>
+                </div>
+                <div class="setting-toggle active">ON</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">Detection Stats</div>
+                <div class="panel-sub">Your Performance</div>
+              </div>
+            </div>
+            <div style="text-align:center;padding:20px">
+              <div style="font-family:'Orbitron',monospace;font-size:32px;font-weight:700;color:#00FF88;margin-bottom:8px">847</div>
+              <div style="font-size:12px;color:#6A9EC0">Threats Detected</div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">Accuracy Rate</div>
+                <div class="panel-sub">Detection Precision</div>
+              </div>
+            </div>
+            <div style="text-align:center;padding:20px">
+              <div style="font-family:'Orbitron',monospace;font-size:32px;font-weight:700;color:#00C8FF;margin-bottom:8px">98.2%</div>
+              <div style="font-size:12px;color:#6A9EC0">Accuracy Score</div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">Rank</div>
+                <div class="panel-sub">Global Leaderboard</div>
+              </div>
+            </div>
+            <div style="text-align:center;padding:20px">
+              <div style="font-family:'Orbitron',monospace;font-size:32px;font-weight:700;color:#7C3AED;margin-bottom:8px">#12</div>
+              <div style="font-size:12px;color:#6A9EC0">Worldwide Rank</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /profile -->ont-weight:600;color:#00FF88;border:1px solid rgba(0,255,136,0.3);border-radius:4px;padding:2px 8px">ACTIVE</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--bg-panel);border:1px solid var(--border);border-radius:10px">
+                <div style="width:36px;height:36px;border-radius:8px;background:rgba(255,149,0,0.1);display:flex;align-items:center;justify-content:center;font-size:16px">🌐</div>
+                <div style="flex:1">
+                  <div style="font-size:13px;font-weight:600;color:var(--text-primary)">AbuseIPDB</div>
+                  <div style="font-size:11px;color:#6A9EC0">IP reputation database · Abuse reports</div>
+                </div>
+                <div style="font-size:10px;font-weight:600;color:#00FF88;border:1px solid rgba(0,255,136,0.3);border-radius:4px;padding:2px 8px">ACTIVE</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--bg-panel);border:1px solid var(--border);border-radius:10px">
+                <div style="width:36px;height:36px;border-radius:8px;background:rgba(124,58,237,0.1);display:flex;align-items:center;justify-content:center;font-size:16px">💉</div>
+                <div style="flex:1">
+                  <div style="font-size:13px;font-weight:600;color:var(--text-primary)">URLHaus</div>
+                  <div style="font-size:11px;color:#6A9EC0">Malware URL database · Abuse.ch feed</div>
+                </div>
+                <div style="font-size:10px;font-weight:600;color:#00FF88;border:1px solid rgba(0,255,136,0.3);border-radius:4px;padding:2px 8px">ACTIVE</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--bg-panel);border:1px solid var(--border);border-radius:10px">
+                <div style="width:36px;height:36px;border-radius:8px;background:rgba(0,200,255,0.1);display:flex;align-items:center;justify-content:center;font-size:16px">📍</div>
+                <div style="flex:1">
+                  <div style="font-size:13px;font-weight:600;color:var(--text-primary)">IPinfo API</div>
+                  <div style="font-size:11px;color:#6A9EC0">Geolocation · ASN · ISP data</div>
+                </div>
+                <div style="font-size:10px;font-weight:600;color:#00FF88;border:1px solid rgba(0,255,136,0.3);border-radius:4px;padding:2px 8px">ACTIVE</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Advanced Features -->
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Advanced Intelligence Modules</div>
+              <div class="panel-sub">LinkCortexa AI Enterprise Features</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+            <div style="background:var(--bg-panel);border:1px solid rgba(0,200,255,0.15);border-radius:10px;padding:16px">
+              <div style="font-size:24px;margin-bottom:8px">📧</div>
+              <div style="font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:var(--cyan);margin-bottom:6px">Email Phishing Analyzer</div>
+              <div style="font-size:11px;color:#6A9EC0;line-height:1.5">Paste suspicious email content to extract and analyze embedded links, sender reputation, and phishing indicators.</div>
+            </div>
+            <div style="background:var(--bg-panel);border:1px solid rgba(255,58,92,0.15);border-radius:10px;padding:16px">
+              <div style="font-size:24px;margin-bottom:8px">🔤</div>
+              <div style="font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:var(--red);margin-bottom:6px">Typosquatting Detector</div>
+              <div style="font-size:11px;color:#6A9EC0;line-height:1.5">Detect fake domains like g00gle.com, paypaI.com by comparing against 10,000+ legitimate domains using Levenshtein distance.</div>
+            </div>
+            <div style="background:var(--bg-panel);border:1px solid rgba(124,58,237,0.15);border-radius:10px;padding:16px">
+              <div style="font-size:24px;margin-bottom:8px">📸</div>
+              <div style="font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:var(--purple);margin-bottom:6px">Screenshot Detection</div>
+              <div style="font-size:11px;color:#6A9EC0;line-height:1.5">Upload webpage screenshots for AI visual analysis to detect fake login pages, brand impersonation, and cloned websites.</div>
+            </div>
+            <div style="background:var(--bg-panel);border:1px solid rgba(0,255,136,0.15);border-radius:10px;padding:16px">
+              <div style="font-size:24px;margin-bottom:8px">🌑</div>
+              <div style="font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:var(--green);margin-bottom:6px">Dark Web Monitor</div>
+              <div style="font-size:11px;color:#6A9EC0;line-height:1.5">Check if your domain or email appears in dark web data breaches, credential dumps, or underground marketplaces.</div>
+            </div>
+            <div style="background:var(--bg-panel);border:1px solid rgba(255,149,0,0.15);border-radius:10px;padding:16px">
+              <div style="font-size:24px;margin-bottom:8px">🕸️</div>
+              <div style="font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:var(--orange);margin-bottom:6px">Threat Graph</div>
+              <div style="font-size:11px;color:#6A9EC0;line-height:1.5">Visualize connections between IPs, domains, malware families, and attack campaigns using D3.js graph visualization.</div>
+            </div>
+            <div style="background:var(--bg-panel);border:1px solid rgba(0,200,255,0.15);border-radius:10px;padding:16px">
+              <div style="font-size:24px;margin-bottom:8px">🔌</div>
+              <div style="font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:var(--cyan);margin-bottom:6px">Browser Extension</div>
+              <div style="font-size:11px;color:#6A9EC0;line-height:1.5">Real-time Chrome protection — automatically scans every website visited and shows instant threat warnings.</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /intelligence -->
+
+      <!-- ═══════════════ BLOCKCHAIN PAGE ═══════════════ -->
+      <div class="page" id="page-blockchain">
+
+        <div class="stats-grid" style="grid-template-columns:repeat(4,1fr)">
+          <div class="stat-card" style="--stat-color:#7C3AED">
+            <div class="stat-label">Total Blocks</div>
+            <div class="stat-value">50</div>
+            <div class="stat-sub">Ethereum Sepolia</div>
+          </div>
+          <div class="stat-card" style="--stat-color:#00FF88">
+            <div class="stat-label">Verified</div>
+            <div class="stat-value">50</div>
+            <div class="stat-sub">100% verified</div>
+          </div>
+          <div class="stat-card" style="--stat-color:#FF3A5C">
+            <div class="stat-label">Tampered</div>
+            <div class="stat-value">0</div>
+            <div class="stat-sub">Zero incidents</div>
+          </div>
+          <div class="stat-card" style="--stat-color:#00C8FF">
+            <div class="stat-label">Avg Gas Used</div>
+            <div class="stat-value">21K</div>
+            <div class="stat-sub">Wei per tx</div>
+          </div>
+        </div>
+
+        <!-- Process diagram -->
+        <div class="panel" style="margin-bottom:16px">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Blockchain Logging Process</div>
+              <div class="panel-sub">Tamper-Proof Evidence Chain</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:0;overflow-x:auto;padding:8px 0">
+            <div style="flex-shrink:0;text-align:center;padding:12px 20px;background:rgba(255,58,92,0.07);border:1px solid rgba(255,58,92,0.2);border-radius:10px">
+              <div style="font-size:20px;margin-bottom:4px">🚨</div>
+              <div style="font-size:10px;font-weight:700;color:var(--red);letter-spacing:1px">THREAT<br>DETECTED</div>
+            </div>
+            <div style="color:#3D5F7A;font-size:20px;padding:0 12px">→</div>
+            <div style="flex-shrink:0;text-align:center;padding:12px 20px;background:rgba(0,200,255,0.07);border:1px solid rgba(0,200,255,0.2);border-radius:10px">
+              <div style="font-size:20px;margin-bottom:4px">#️⃣</div>
+              <div style="font-size:10px;font-weight:700;color:var(--cyan);letter-spacing:1px">SHA256<br>HASH</div>
+            </div>
+            <div style="color:#3D5F7A;font-size:20px;padding:0 12px">→</div>
+            <div style="flex-shrink:0;text-align:center;padding:12px 20px;background:rgba(124,58,237,0.07);border:1px solid rgba(124,58,237,0.2);border-radius:10px">
+              <div style="font-size:20px;margin-bottom:4px">⛓️</div>
+              <div style="font-size:10px;font-weight:700;color:var(--purple);letter-spacing:1px">ETHEREUM<br>STORAGE</div>
+            </div>
+            <div style="color:#3D5F7A;font-size:20px;padding:0 12px">→</div>
+            <div style="flex-shrink:0;text-align:center;padding:12px 20px;background:rgba(0,255,136,0.07);border:1px solid rgba(0,255,136,0.2);border-radius:10px">
+              <div style="font-size:20px;margin-bottom:4px">🔑</div>
+              <div style="font-size:10px;font-weight:700;color:var(--green);letter-spacing:1px">TX ID<br>RETURNED</div>
+            </div>
+            <div style="color:#3D5F7A;font-size:20px;padding:0 12px">→</div>
+            <div style="flex-shrink:0;text-align:center;padding:12px 20px;background:rgba(0,200,255,0.07);border:1px solid rgba(0,200,255,0.2);border-radius:10px">
+              <div style="font-size:20px;margin-bottom:4px">✅</div>
+              <div style="font-size:10px;font-weight:700;color:var(--cyan);letter-spacing:1px">DB<br>UPDATED</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Immutable Security Logs</div>
+              <div class="panel-sub">Ethereum Sepolia Testnet · All Verified</div>
+            </div>
+            <div class="panel-badge" style="color:#7C3AED;border-color:rgba(124,58,237,0.3);background:rgba(124,58,237,0.07)">BLOCKCHAIN LIVE</div>
+          </div>
+          <div id="blockchainLogs"></div>
+        </div>
+
+      </div><!-- /blockchain -->
+
+      <!-- ═══════════════ PROFILE PAGE ═══════════════ -->
+      <div class="page" id="page-profile">
+
+        <div class="profile-hero">
+          <div class="profile-avatar-lg">KP</div>
+          <div class="profile-info">
+            <h2>Kathirvel P</h2>
+            <p>kathirvel.p2006@gmail.com · Security Analyst · Level 3 Access</p>
+            <div class="profile-tags">
+              <span class="profile-tag type-safe">Active</span>
+              <span class="profile-tag badge-cyan">Admin</span>
+              <span class="profile-tag" style="color:var(--purple);border-color:rgba(124,58,237,0.3);background:rgba(124,58,237,0.07)">Blockchain Verified</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="panel">
+            <div class="panel-title" style="margin-bottom:16px">Security Activity</div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:var(--bg-panel);border-radius:8px">
+                <span style="font-size:13px;color:#6A9EC0">Total Scans Performed</span>
+                <span style="font-family:'Orbitron',monospace;font-size:16px;font-weight:700;color:var(--cyan)">50</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:var(--bg-panel);border-radius:8px">
+                <span style="font-size:13px;color:#6A9EC0">Threats Detected</span>
+                <span style="font-family:'Orbitron',monospace;font-size:16px;font-weight:700;color:var(--red)">40</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:var(--bg-panel);border-radius:8px">
+                <span style="font-size:13px;color:#6A9EC0">Blockchain Logs Created</span>
+                <span style="font-family:'Orbitron',monospace;font-size:16px;font-weight:700;color:var(--purple)">50</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:var(--bg-panel);border-radius:8px">
+                <span style="font-size:13px;color:#6A9EC0">Account Created</span>
+                <span style="font-size:13px;color:var(--text-primary)">2025-09-01</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-title" style="margin-bottom:16px">Platform Advantages</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;gap:10px;font-size:12px;color:#6A9EC0"><span style="color:var(--green)">✓</span> All-in-One cybersecurity platform</div>
+              <div style="display:flex;gap:10px;font-size:12px;color:#6A9EC0"><span style="color:var(--green)">✓</span> AI-powered phishing detection</div>
+              <div style="display:flex;gap:10px;font-size:12px;color:#6A9EC0"><span style="color:var(--green)">✓</span> Real-time monitoring & alerts</div>
+              <div style="display:flex;gap:10px;font-size:12px;color:#6A9EC0"><span style="color:var(--green)">✓</span> Blockchain tamper-proof logs</div>
+              <div style="display:flex;gap:10px;font-size:12px;color:#6A9EC0"><span style="color:var(--green)">✓</span> Global cyber attack visualization</div>
+              <div style="display:flex;gap:10px;font-size:12px;color:#6A9EC0"><span style="color:var(--green)">✓</span> Browser extension protection</div>
+              <div style="display:flex;gap:10px;font-size:12px;color:#6A9EC0"><span style="color:var(--green)">✓</span> Multi-layer URL analysis</div>
+              <div style="display:flex;gap:10px;font-size:12px;color:#6A9EC0"><span style="color:var(--green)">✓</span> Forensic audit trail</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /profile -->
+
+    </div><!-- /page-content -->
+  </div><!-- /main-content -->
+</div><!-- /app-layout -->
+
+<!-- Scroll to top -->
+<div class="scroll-top">↑</div>
+
+<!-- Chart.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<!-- App JS -->
+<script src="js/app.js"></script>
+</body>
+</html>
